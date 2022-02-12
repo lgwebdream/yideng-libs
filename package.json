@@ -1,0 +1,21 @@
+{
+  "name": "yd-libs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@microsoft/api-extractor": "^7.19.4",
+    "microbundle": "^0.14.2",
+    "typedoc": "^0.22.11"
+  }
+}

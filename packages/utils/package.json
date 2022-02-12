@@ -1,0 +1,25 @@
+{
+  "name": "@yideng/utils",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "志佳 <495725428@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/utils.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
+  "scripts": {
+    "dev": "microbundle"
+  },
+  "dependencies": {
+    "@yideng/core": "^1.0.0"
+  }
+}

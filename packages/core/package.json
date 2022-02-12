@@ -1,0 +1,25 @@
+{
+  "name": "@yideng/core",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "志佳 <495725428@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "microbundle": "^0.14.2"
+  }
+}
