@@ -1,6 +1,6 @@
 {
   "name": "@yideng/utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "> TODO: description",
   "author": "志佳 <495725428@qq.com>",
   "homepage": "",
@@ -20,6 +20,6 @@
     "dev": "microbundle"
   },
   "dependencies": {
-    "@yideng/core": "^1.0.1"
+    "@yideng/core": "^1.0.2"
   }
 }
