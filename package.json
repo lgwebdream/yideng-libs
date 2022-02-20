@@ -15,7 +15,10 @@
   },
   "dependencies": {
     "@microsoft/api-extractor": "^7.19.4",
+    "@tsconfig/recommended": "^1.0.1",
+    "@xstate/graph": "^1.4.1",
     "microbundle": "^0.14.2",
-    "typedoc": "^0.22.11"
+    "typedoc": "^0.22.11",
+    "xstate": "^4.30.0"
   }
 }
