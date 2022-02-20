@@ -21,59 +21,63 @@ const fetchCuteAnimals = () => {
   return normalTask;
 };
 //状态机
-// const toggleMachine = createMachine({
-//   id: 'toggle',
-//   initial: 'inactive',
-//   states: {
-//     inactive: {
-//       on: {
-//         TOGGLE: {
-//           target: 'active',
-//         },
-//       },
-//     },
-//     active: {
-//       on: { TOGGLE: 'inactive' },
-//     },
-//   },
-// });
 const toggleMachine = createMachine({
-  id: 'user',
-  initial: 'idle',
-  context: {} as DemoData,
+  id: 'toggle',
+  initial: 'inactive',
   states: {
-    idle: {
+    inactive: {
       on: {
-        FETCH: { target: 'loading' },
-      },
-    },
-    loading: {
-      invoke: {
-        id: 'getUser',
-        src: fetchCuteAnimals,
-        onDone: {
-          target: 'success',
-          actions: assign({ user: (_context, event) => event.data }),
-        },
-        onError: {
-          target: 'failure',
-          actions: assign({ error: (_context, event) => event.data.error }),
+        TOGGLE: {
+          target: 'active',
         },
       },
     },
-    success: { type: 'final' },
-    failure: {
-      on: {
-        RETRY: { target: 'loading' },
-      },
+    active: {
+      on: { TOGGLE: 'inactive' },
     },
   },
 });
+// const toggleMachine = createMachine({
+//   id: 'user',
+//   initial: 'idle',
+//   context: {} as DemoData,
+//   states: {
+//     idle: {
+//       on: {
+//         FETCH: { target: 'loading' },
+//       },
+//     },
+//     loading: {
+//       invoke: {
+//         id: 'getUser',
+//         src: fetchCuteAnimals,
+//         onDone: {
+//           target: 'success',
+//           actions: assign({ user: (_context, event) => event.data }),
+//         },
+//         onError: {
+//           target: 'failure',
+//           actions: assign({ error: (_context, event) => event.data.error }),
+//         },
+//       },
+//     },
+//     success: { type: 'final' },
+//     failure: {
+//       on: {
+//         RETRY: { target: 'loading' },
+//       },
+//     },
+//   },
+// });
 const toggleService = interpret(toggleMachine).start();
 toggleService.onTransition((state) => {
   console.log('🍊🍊🍊🍊🍊', state.value, state.context);
+  const selectionFired = new CustomEvent('ctoggle', {
+    detail: state.value,
+  });
   //windows上的应用
   window.dispatchEvent(new Event('toggle'));
+  window.dispatchEvent(selectionFired);
 });
 // toggleService.send('TOGGLE');
 export { normalTask, DemoData, toggleService };
