@@ -1,5 +1,5 @@
 import data from '@yideng/core';
-import { createMachine, interpret } from 'xstate';
+import { assign, createMachine, interpret } from 'xstate';
 console.log('data 数据🐻 --> ', data);
 //基础Promise任务
 type DemoData = {
@@ -17,26 +17,61 @@ const normalTask = new Promise<DemoData>((resolve, reject) => {
     }
   }, 300);
 });
+const fetchCuteAnimals = () => {
+  return normalTask;
+};
 //状态机
+// const toggleMachine = createMachine({
+//   id: 'toggle',
+//   initial: 'inactive',
+//   states: {
+//     inactive: {
+//       on: {
+//         TOGGLE: {
+//           target: 'active',
+//         },
+//       },
+//     },
+//     active: {
+//       on: { TOGGLE: 'inactive' },
+//     },
+//   },
+// });
 const toggleMachine = createMachine({
-  id: 'toggle',
-  initial: 'inactive',
+  id: 'user',
+  initial: 'idle',
+  context: {} as DemoData,
   states: {
-    inactive: {
+    idle: {
       on: {
-        TOGGLE: {
-          target: 'active',
+        FETCH: { target: 'loading' },
+      },
+    },
+    loading: {
+      invoke: {
+        id: 'getUser',
+        src: fetchCuteAnimals,
+        onDone: {
+          target: 'success',
+          actions: assign({ user: (_context, event) => event.data }),
+        },
+        onError: {
+          target: 'failure',
+          actions: assign({ error: (_context, event) => event.data.error }),
         },
       },
     },
-    active: {
-      on: { TOGGLE: 'inactive' },
+    success: { type: 'final' },
+    failure: {
+      on: {
+        RETRY: { target: 'loading' },
+      },
     },
   },
 });
 const toggleService = interpret(toggleMachine).start();
 toggleService.onTransition((state) => {
-  console.log('🍊🍊🍊🍊🍊', state.value);
+  console.log('🍊🍊🍊🍊🍊', state.value, state.context);
   //windows上的应用
   window.dispatchEvent(new Event('toggle'));
 });
